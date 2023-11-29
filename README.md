@@ -2,21 +2,21 @@
 
 ## Tasks to be completed:
 
-~~ ### Database ~~
+~~###Database~~
 
-~~ Create database called dolphin_crm using SQL. Should include a users table, contacts table and notes table in a file called schema.sql. ~~
+~~Create database called dolphin_crm using SQL. Should include a users table, contacts table and notes table in a file called schema.sql.~~
 
-### Login Page
+~~### Login Page~~
 
-- Write HTML and CSS for Dolphin CRM Login Page 
+- Write ~~HTML~~ CSS for Dolphin CRM Login Page 
 
-~~ - Write PHP that checks if the entered email address and password is in the Users table in the database and if the role is "Admin" ~~
+~~Write PHP that checks if the entered email address and password is in the Users table in the database and if the role is "Admin"~~
 
-### New User
+~~### New User~~
 
-- Write HTML and CSS for Dolphin CRM New User
+- Write ~~HTML~~ and CSS for Dolphin CRM New User
 
-- Write PHP and JavaScript that accepts the first name, last name, email, password and role. The entered data must be sanitized before entered into the User table in the database
+~~Write PHP that accepts the first name, last name, email, password and role. The entered data must be sanitized before entered into the User table in the database~~
 
 ### Users Page
 
