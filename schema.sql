@@ -13,6 +13,7 @@ CREATE TABLE Users (
 
 INSERT INTO Users (firstname, lastname, password, email, role)
 VALUES 
+('Bob', 'Billings', 'password123', 'admin@project2.com', 'Admin'),
 ('Jan', 'Levinson', 'password123', 'jan.levinson@paper.co', 'Member'),
 ('David', 'Wallace', 'iamthecoolest', 'david.wallace@paper.co', 'Admin'),
 ('And', 'Benard', 'andbenardpass', 'and.benard@example.com', 'Member'),
