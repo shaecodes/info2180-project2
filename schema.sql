@@ -11,16 +11,6 @@ CREATE TABLE Users (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO Users (firstname, lastname, password, email, role)
-VALUES 
-('Bob', 'Billings', 'password123', 'admin@project2.com', 'Admin'),
-('Jan', 'Levinson', 'password123', 'jan.levinson@paper.co', 'Member'),
-('David', 'Wallace', 'iamthecoolest', 'david.wallace@paper.co', 'Admin'),
-('And', 'Benard', 'andbenardpass', 'and.benard@example.com', 'Member'),
-('Daryl', 'Philbin', 'darylphilbin123', 'daryl.philbin@example.com', 'Member'),
-('Erin', 'Hannon', 'erinhannonpass', 'erin.hannon@example.com', 'Member');
-
-
 CREATE TABLE Contacts (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(255) NOT NULL,
