@@ -38,7 +38,7 @@
 
 - Write PHP and JavaScript that accepts the contact's title, first name, last name, email, telephone number, company, type and person assigned to. The person "Assigned To" is a dropdown menu that consists of all users in the system. 
 
-* Note: This is just a summary. Please see the project instructions for further details 
+##### Note: This is just a summary. Please see the project instructions for further details 
 
 #### Helpful Links:
 
