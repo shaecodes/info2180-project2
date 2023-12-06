@@ -20,7 +20,7 @@ CREATE TABLE Contacts (
     email VARCHAR(35) NOT NULL,
     telephone VARCHAR(15) NOT NULL,
     company VARCHAR(55) NOT NULL,
-    type VARCHAR(35) NOT NULL,
+    types VARCHAR(35) NOT NULL,
     assigned_to INT,
     created_by INT,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,

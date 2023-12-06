@@ -1,5 +1,5 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//
 $host = "localhost";
 $username = "proj2_user";
 $password = "groupbest1234";
@@ -13,6 +13,7 @@ $email = $_POST['email'] ?? '';
 $telephone = $_POST['t_phone'] ?? '';
 $company = $_POST['company'] ?? '';
 $type = $_POST['type'] ?? '';
+echo $title;
 $assign = $_POST['assign_user'] ?? '';
 
 $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
@@ -27,9 +28,28 @@ foreach($rows as $row ) {
 
 echo $options;
 
-$sql1 = "INSERT INTO Contacts (title, firstname, lastname, email, telephone, company, type, assigned_to, created_by, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, 1,2,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)";
+/*$sql1 = "INSERT INTO Contacts (title, firstname, lastname, email, telephone, company, type, assigned_to, created_by, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, 1,2,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)";
 $push = $conn->prepare($sql1);
-$push->execute();}
+$push->execute();*///
 
+function submit(){
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        global $conn, $title, $fname, $lname, $email, $telephone, $company, $type, $host, $dbname, $username, $password;
+        $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
+        $sql1 = "INSERT INTO Contacts (title,firstname, lastname, email, telephone, company,types, assigned_to) VALUES ('$title', '$fname', '$lname', '$email', $telephone, '$company', '$type', 1)";
+        if ($conn->query($sql1) === TRUE) {
+            echo "Record inserted successfully";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+        //$push = $conn->prepare($sql1);
+        $push->execute();
+        echo "Yes";
+    }else{
+        echo "No";
+    }
+}
+
+submit();
 
 ?>
