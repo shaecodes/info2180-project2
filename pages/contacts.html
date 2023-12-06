@@ -14,7 +14,7 @@
         <p>Dolphin CRM</p>
     </header>
 
-    <? php include '../php/header.php';?>
+    <?php include '../php/header.php';?>
 
     <p> New Contact</p>
 
@@ -24,7 +24,7 @@
             <label for="title">Title</label>
             <br>
             <select id="title" name="title" required>
-                <option value="Null">---</option>
+                <option value="">---</option>
                 <option value="Mr">Mr</option>
                 <option value="Ms">Ms</option>
                 <option value="Mrs">Mrs</option>
@@ -44,11 +44,12 @@
 
             <label for="Email">Email</label>
             <br>
-            <input type="text" name="email" id="email_address" placeholder="something@example.com" required>
+            <input type="email" name="email" id="email_address" placeholder="something@example.com" required>
 
-            <label for="Telephone">Telephone</label>
+            <label for="Telephone">Telephone  (Format: 876-123-4567)</label>
             <br>
-            <input type="text" name="t_phone" id="telephone_num" placeholder="876-123-4567" required>
+            <input type="tel" name="t_phone" id="telephone_num" placeholder="876-123-4567" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+
 
             <br><br><br>
 
@@ -59,7 +60,7 @@
             <label for="Type">Type</label>
             <br>
             <select id="type" name="type" required>
-                <option value="Null">---</option>
+                <option value="">---</option>
                 <option value="Sales Lead">Sales Lead</option>
                 <option value="Support">Support</option>
             </select>

@@ -6,9 +6,9 @@ CREATE TABLE Users (
     id INT PRIMARY KEY AUTO_INCREMENT,
     firstname VARCHAR(35) NOT NULL,
     lastname VARCHAR(35) NOT NULL,
-    pwd VARCHAR(35) NOT NULL,
+    pwd VARCHAR(85) NOT NULL,
     email VARCHAR(35) NOT NULL UNIQUE,
-    role VARCHAR(35) NOT NULL,
+    _role VARCHAR(35) NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -20,17 +20,17 @@ CREATE TABLE Contacts (
     email VARCHAR(35) NOT NULL,
     telephone VARCHAR(15) NOT NULL,
     company VARCHAR(55) NOT NULL,
-    types VARCHAR(35) NOT NULL,
-    assigned_to INT,
-    created_by INT,
+    _type VARCHAR(35) NOT NULL,
+    assigned_to INTEGER,
+    created_by INTEGER,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME NOT NULL,
     FOREIGN KEY (assigned_to) REFERENCES Users(id),
     FOREIGN KEY (created_by) REFERENCES Users(id)
 );
 
-INSERT INTO Users VALUES (1,'John','Brown',"john123","jogn@gmail.com","Member",CURRENT_TIMESTAMP);
-INSERT INTO Contacts VALUES (1,"Mr.",'John','Brown',"jogn@gmail.com","876-948-2424","KFC","Support",1,2,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO Users VALUES (1,'John','Brown',"$2y$10$f1Qyv4wvRZxPRmUjzl07R.HFtaAOwC3XKLXqeHcbXSdL06Cdyuypi","johnb@gmail.com","Admin",CURRENT_TIMESTAMP),
+(2,'Mary','White',"$2y$10$uTSs0PPWzfJZmSuQyKaYG.CE4NLZXSIOBJyRIucoE.LZJTi6AwZc.","maryw@gmail.com","Member",CURRENT_TIMESTAMP);
 
 CREATE TABLE Notes (
     id INT PRIMARY KEY AUTO_INCREMENT,

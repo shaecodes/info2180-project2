@@ -3,10 +3,9 @@ $host = 'localhost';
 $username = 'proj2_user';
 $password = 'groupbest1234';
 $dbname = 'dolphin_crm';
-$name = "";
 
 $link = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
-$search = $link->query("SELECT * FROM Users u join Contacts c on u.id = c.id");
+$search = $link->query("SELECT firstname,lastname,email,_role,created_at FROM Users");
 $users = $search->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -21,13 +20,12 @@ $users = $search->fetchAll(PDO::FETCH_ASSOC);
     </thead>
     <tbody>
         <?php foreach ($users as $user): ?>
-            <?php $name.= $user['title'].= " ";
-            $name.= $user['firstname'].= " ";
+            <?php $name = $user['firstname'].= " ";
             $name.= $user['lastname'];?>
             <tr>
                 <td><?= $name ?></td>
                 <td><?= $user['email'] ?></td>
-                <td><?= $user['role'] ?></td>
+                <td><?= $user['_role'] ?></td>
                 <td><?= $user['created_at'] ?></td>
             </tr>
         <?php endforeach; ?>
