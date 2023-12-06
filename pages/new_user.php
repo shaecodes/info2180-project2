@@ -10,14 +10,9 @@
         <img src="#" alt="">
         <p>Dolphin CRM</p>
     </header>
-
-    <nav>
-        <a href="#">Home</a>
-        <a href="#">New Contact</a>
-        <a href="new_user.html">Users</a>
-        <a href="#">Logout</a>
-    </nav>
-
+    <?php 
+        include('header.php');
+    ?>
     <div class="users">
         <form action="../php/new_user.php" method="post" class = "new_user">
             <label for="firstName">First Name</label>

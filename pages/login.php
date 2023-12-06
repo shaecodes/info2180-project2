@@ -9,12 +9,9 @@
     <img src = "#" alt="">
     <p>Dolphin CRM</p>
 </header>
-<nav>
-    <a href="#">Home</a>
-    <a href="#">New Contact</a>
-    <a href="new_user.html">Users</a>
-    <a href="#">Logout</a>
-</nav>
+<?php 
+    include('header.php');
+?>
 <body>
     <h1>Login</h1> 
     <form action="../php/login.php" method="post" class = "login">
