@@ -14,16 +14,14 @@
         <p>Dolphin CRM</p>
     </header>
 
-    <nav>
-        <?php 
+    <?php 
         include('header.php');
     ?>
-    </nav>
 
     <div class="users">
         <header id="user">
             <p>Users</p>
-            <a href="new_user.html">
+            <a href="new_user.php">
                 <button type="button" class="add-user">+Add User</button>
             </a>
         </header>
