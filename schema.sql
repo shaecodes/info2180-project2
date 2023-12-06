@@ -30,7 +30,7 @@ CREATE TABLE Contacts (
 );
 
 INSERT INTO Users VALUES (1,'John','Brown',"john123","jogn@gmail.com","Member",CURRENT_TIMESTAMP);
-INSERT INTO Contacts VALUES (1,"Mr.",'John','Brown',"jogn@gmail.com","876-948-2424","kfc","food",1,2,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO Contacts VALUES (1,"Mr.",'John','Brown',"jogn@gmail.com","876-948-2424","KFC","Support",1,2,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
 
 CREATE TABLE Notes (
     id INT PRIMARY KEY AUTO_INCREMENT,
