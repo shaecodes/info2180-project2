@@ -1,4 +1,5 @@
-CREATE DATABASE IF NOT EXISTS dolphin_crm;
+DROP DATABASE IF EXISTS dolphin_crm;
+CREATE DATABASE dolphin_crm;
 USE dolphin_crm;
 
 CREATE TABLE Users (
@@ -25,6 +26,9 @@ CREATE TABLE Contacts (
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME NOT NULL
 );
+
+INSERT INTO Users VALUES (1,'John','Brown',"john123","jogn@gmail.com","Member",NULL);
+INSERT INTO Contacts VALUES (1,"Mr.",'John','Brown',"jogn@gmail.com","876-948-2424","kfc","food",1,2,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
 
 CREATE TABLE Notes (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,

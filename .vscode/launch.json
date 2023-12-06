@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "msedge",
+            "name": "http://localhost/info2180-project2/html/users.html",
+            "request": "launch",
+            "url": "http://localhost/info2180-project2/html/users.html"
+        }
+    ]
+}
