@@ -1,91 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="../script/contacts.js" type="text/javascript"></script>
-        <title>Contact</title>
-    </head>
 
-    <body>
-        <header id="title">
-            <img src="#" alt="">
-            <p>Dolphin CRM</p>
-        </header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../script/contacts.js" type="text/javascript"></script>
+    <title>Contact</title>
+</head>
 
-        <? php include '../php/header.php';?>
+<body>
+    <header id="title">
+        <img src="#" alt="">
+        <p>Dolphin CRM</p>
+    </header>
 
-        <p> New Contact</p>
+    <? php include '../php/header.php';?>
 
-        <div class="title">
-            <form method="post" action="../php/contact.php" id="contact">
-                <label for="title">Title</label>
-                <br>
-                <select id="title" name="title" required>
-                    <option value="Mr">Mr</option>
-                    <option value="Ms">Ms</option>
-                    <option value="Mrs">Mrs</option>
-                </select>
+    <p> New Contact</p>
 
-            </form>
-        </div>
+    <div class="contact">
 
-        <br>
+        <form method="post" action="../php/contact.php" id="contact">
+            <label for="title">Title</label>
+            <br>
+            <select id="title" name="title" required>
+                <option value="Null">---</option>
+                <option value="Mr">Mr</option>
+                <option value="Ms">Ms</option>
+                <option value="Mrs">Mrs</option>
+            </select>
 
-        <div class="name">
-            <form method="post" action="../php/contact.php" id="contact">
-                <label for="Fname">First Name</label>
-                <br>
-                <input type="text" name="fname" id="first_name" placeholder="First Name" required>
+            <br><br><br>
 
-                <label for="Lname">Last Name</label>
-                <br>
-                <input type="text" name="lname" id="last_name" placeholder="Last Name" required>
-            </form>
-        </div>
+            <label for="Fname">First Name</label>
+            <br>
+            <input type="text" name="fname" id="first_name" placeholder="First Name" required>
 
-        <br>
+            <label for="Lname">Last Name</label>
+            <br>
+            <input type="text" name="lname" id="last_name" placeholder="Last Name" required>
 
-        <div class="email_tele">
-            <form method="post" action="../php/contact.php" id="contact">
-                <label for="Email">Email</label>
-                <br>
-                <input type="text" name="email" id="email_address" placeholder="something@example.com" required>
+            <br><br><br>
 
-                <label for="Telephone">Telephone</label>
-                <br>
-                <input type="text" name="t_phone" id="telephone_num" placeholder="876-123-4567" required>
-            </form>
-        </div>
+            <label for="Email">Email</label>
+            <br>
+            <input type="text" name="email" id="email_address" placeholder="something@example.com" required>
 
-        <br>
+            <label for="Telephone">Telephone</label>
+            <br>
+            <input type="text" name="t_phone" id="telephone_num" placeholder="876-123-4567" required>
 
-        <div class="company_type">
-            <form method="post" action="../php/contact.php" id="contact">
-                <label for="Company">Company</label>
-                <br>
-                <input type="text" name="company" id="company" placeholder="Gace Bennedy" required>
+            <br><br><br>
 
-                <label for="Type">Type</label>
-                <br>
-                <select id="type" name="type" required>
-                    <option value="Sales Lead">Sales Lead</option>
-                    <option value="Support">Support</option>
-                </select>
-            </form>
-        </div>
+            <label for="Company">Company</label>
+            <br>
+            <input type="text" name="company" id="company" placeholder="Gace Bennedy" required>
 
-        <br>
+            <label for="Type">Type</label>
+            <br>
+            <select id="type" name="type" required>
+                <option value="Null">---</option>
+                <option value="Sales Lead">Sales Lead</option>
+                <option value="Support">Support</option>
+            </select>
 
-        <div class="assign">
-            <form method="post" action="../php/contact.php" id="contact">
-                <label for="Assigned">Assigned To</label>
-                <br>
-                <select  id="assign_user" name="assign_user" required></select>
+            <br><br><br>
 
-                <button type="button" id="save-button" class="btn">Save</button>
-            </form>
-        </div>
+            <label for="Assigned">Assigned To</label>
+            <br>
+            <select id="assign_user" name="assign_user" required></select>
 
-    </body>
+            <input type="submit" name="submit" value="Submit">
+    </div>
+
+</body>
+
 </html>
