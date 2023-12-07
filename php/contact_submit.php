@@ -37,7 +37,7 @@ if(!$stmt->bind_param("sssssssi",$title_fil,$fname_fil,$lname_fil,$email_fil,$te
 }
 
 if ($stmt->execute()) {
-    echo "<script>alert('Contact added successfully')</script>";
+    echo "<h1>Contact added successfully</h1>";
     header("Refresh:1, url=../pages/users.html");
     exit(0);
 } else {

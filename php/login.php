@@ -26,20 +26,20 @@ if ($conn->connect_error){
         // Check if the entered password matches the hashed password in the database
         if (password_verify($password_filter, $data['pwd'])) {
             if ($data['_role'] === "Admin"){
-                echo "<script>alert('Login Successfully')</script>";
+                echo "<h1>Login Successfully</h1>";
                 header("Refresh:1, url=../pages/users.html");
 
                 // should navigate to the dashboard page once created
             } else {
-                echo "<script>alert('Restricted Access. Go Back')</script>";
+                echo "<h1>Restricted Access. Go Back</h1>";
                 header("Refresh:1, url=../pages/login.html");
             } 
         } else {
-            echo "<script>alert('Invalid Password')</script>";
+            echo "<h1>Invalid Password</h1>";
             header("Refresh:1, url=../pages/login.html");
         }
     } else {
-        echo "<script>alert('Invalid Email')</script>";
+        echo "<h1>Invalid Email</h1>";
         header("Refresh:1, url=../pages/login.html");
     }
     

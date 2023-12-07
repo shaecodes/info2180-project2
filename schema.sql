@@ -12,6 +12,10 @@ CREATE TABLE Users (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+INSERT INTO Users VALUES (1,'Admin','User',"$2y$10$sYjBX1kGKDTrwQqW1wKjTOpRBswpoREWGHbEddPcaH0NrYS/qpJF6","admin@gmail.com","Admin",CURRENT_TIMESTAMP),
+(2,'John','Brown',"$2y$10$f1Qyv4wvRZxPRmUjzl07R.HFtaAOwC3XKLXqeHcbXSdL06Cdyuypi","johnb@gmail.com","Member",CURRENT_TIMESTAMP),
+(3,'Mary','White',"$2y$10$uTSs0PPWzfJZmSuQyKaYG.CE4NLZXSIOBJyRIucoE.LZJTi6AwZc.","maryw@gmail.com","Member",CURRENT_TIMESTAMP);
+
 CREATE TABLE Contacts (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(5) NOT NULL,
@@ -28,9 +32,6 @@ CREATE TABLE Contacts (
     FOREIGN KEY (assigned_to) REFERENCES Users(id),
     FOREIGN KEY (created_by) REFERENCES Users(id)
 );
-
-INSERT INTO Users VALUES (1,'John','Brown',"$2y$10$f1Qyv4wvRZxPRmUjzl07R.HFtaAOwC3XKLXqeHcbXSdL06Cdyuypi","johnb@gmail.com","Admin",CURRENT_TIMESTAMP),
-(2,'Mary','White',"$2y$10$uTSs0PPWzfJZmSuQyKaYG.CE4NLZXSIOBJyRIucoE.LZJTi6AwZc.","maryw@gmail.com","Member",CURRENT_TIMESTAMP);
 
 CREATE TABLE Notes (
     id INT PRIMARY KEY AUTO_INCREMENT,
