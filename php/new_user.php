@@ -37,10 +37,10 @@ if (!$stmt->bind_param("sssss", $firstName_filter, $lastName_filter, $email_filt
 }
 
 if ($stmt->execute()) {
-    echo "<script>alert('User added successfully')</script>";
-    header("Refresh:1, url=../pages/users.html");
+    echo "<h1>User added successfully</h1>";
+    header("Refresh:1, url=dashboard.php");
 } else {
-    echo "<script>alert('Error adding user: " . $stmt->error . "')</script>";
+    echo "<h1>Error adding user: " . $stmt->error . "</h1>";
     header("Refresh:1, url=../pages/new_user.html");
 }
 

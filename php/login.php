@@ -33,21 +33,21 @@ if ($conn->connect_error){
             $_SESSION['full_name'] = $_SESSION['first_name'] . ' ' . $_SESSION['last_name'];
             $_SESSION['user_role'] = $data['_role'];
 
-            if ($_SESSION['user_role'] === "Admin"){
-                echo "<script>alert('Login Successfully')</script>";
-                header("Refresh:1, url=../pages/dashboard.php");
+                if ($_SESSION['user_role'] === "Admin"){
+                    echo "<h1>Login Successfully</h1>";
+                    header("Refresh:1, url=dashboard.php");
 
                 // should navigate to the dashboard page once created
-            } else {
-                echo "<script>alert('Restricted Access. Go Back')</script>";
-                header("Refresh:1, url=../pages/login.html");
-            } 
+                } else {
+                    echo "<h1>Restricted Access. Go Back</h1>";
+                    header("Refresh:1, url=../pages/login.html");
+                } 
         } else {
-            echo "<script>alert('Invalid Password')</script>";
+            echo "<h1>Invalid Password</h1>";
             header("Refresh:1, url=../pages/login.html");
         }
     } else {
-        echo "<script>alert('Invalid Email')</script>";
+        echo "<h1>Invalid Email</h1>";
         header("Refresh:1, url=../pages/login.html");
     }
     
