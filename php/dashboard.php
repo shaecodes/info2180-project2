@@ -55,7 +55,7 @@ function fetchContacts()
     <script>
         function addContact() {
             // Redirect to contact.html
-            window.location.href = 'contacts.html';
+            window.location.href = '../pages/contacts.html';
         }
 
         const contacts = [
