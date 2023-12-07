@@ -34,7 +34,7 @@ if ($conn->connect_error){
 
             if ($_SESSION['user_role'] === "Admin"){
                 echo "<script>alert('Login Successfully')</script>";
-                header("Refresh:1, url=../pages/users.html");
+                header("Refresh:1, url=../pages/dashboard.php");
 
                 // should navigate to the dashboard page once created
             } else {

@@ -68,10 +68,8 @@ function fetchContacts()
 </head>
 
 <body>
-
-
-
     <header>
+    <?php include('../php/header.php');?>
         <h1>Dashboard</h1>
         <button class="add-contact-btn" onclick="addContact()">&#43; Add Contact</button>
     </header>
