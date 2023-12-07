@@ -1,4 +1,6 @@
 <?php
+session_start();
+echo $_SESSION['user_id'];
 
 function connectToDatabase()
 {
@@ -63,48 +65,43 @@ function fetchContacts()
             // List for Contacts
         ];
 
-
     </script>
 </head>
 
 <body>
     <header>
-    <?php include('../php/header.php');?>
+        <?php include('../php/header.php');?>
         <h1>Dashboard</h1>
         <button class="add-contact-btn" onclick="addContact()">&#43; Add Contact</button>
     </header>
 
-
-    <div id="contacts" action="">
-        <table>
-            <thead>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Company</th>
-                <th>Type</th>
-            </thead>
-            <tbody>
-                <?php $contacts = fetchContacts(); ?>
-                <?php foreach ($contacts as $contact): ?>
-                    <tr>
-                        <td>
-                            <?php echo $contact['title'] . ' ' . $contact['firstname'] . ' ' . $contact['lastname']; ?>
-                        </td>
-                        <td>
-                            <?php echo $contact['email']; ?>
-                        </td>
-                        <td>
-                            <?php echo $contact['company']; ?>
-                        </td>
-                        <td>
-                            <?php echo $contact['_type']; ?>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
-
+    <?php
+    if (isset($_SESSION['user_id'])) {
+        echo '<div id="contacts" action="">
+            <table>
+                <thead>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Company</th>
+                    <th>Type</th>
+                </thead>
+                <tbody>';
+        $contacts = fetchContacts(); // You need to implement the fetchContacts() function
+        foreach ($contacts as $contact) {
+            echo '<tr>
+                <td>' . $contact['title'] . ' ' . $contact['firstname'] . ' ' . $contact['lastname'] . '</td>
+                <td>' . $contact['email'] . '</td>
+                <td>' . $contact['company'] . '</td>
+                <td>' . $contact['_type'] . '</td>
+            </tr>';
+        }
+        echo '</tbody>
+            </table>
+        </div>';
+    } else {
+        echo '<p>Please <a href="../pages/login.html">log in</a> to view the user table.</p>';
+    }
+    ?>
 
 </body>
 
