@@ -1,9 +1,6 @@
 <?php
-<<<<<<< HEAD:pages/dashboard.php
 session_start();
 echo $_SESSION['full_name'];
-=======
->>>>>>> 2ca7da32b8533a601874add865cd59a245046786:php/dashboard.php
 
 function connectToDatabase()
 {
@@ -79,7 +76,6 @@ function fetchContacts()
         <button class="add-contact-btn" onclick="addContact()">&#43; Add Contact</button>
     </header>
 
-<<<<<<< HEAD:pages/dashboard.php
     <?php
     if (isset($_SESSION['full_name'])) {
         echo '<div id="contacts" action="">
@@ -107,39 +103,6 @@ function fetchContacts()
         echo '<p>Please <a href="../pages/login.html">log in</a> to view the user table.</p>';
     }
     ?>
-=======
-
-    <div id="contacts" action="">
-        <table>
-            <thead>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Company</th>
-                <th>Type</th>
-            </thead>
-            <tbody>
-                <?php $contacts = fetchContacts(); ?>
-                <?php foreach ($contacts as $contact): ?>
-                    <tr>
-                        <td>
-                            <?php echo $contact['title'] . ' ' . $contact['firstname'] . ' ' . $contact['lastname']; ?>
-                        </td>
-                        <td>
-                            <?php echo $contact['email']; ?>
-                        </td>
-                        <td>
-                            <?php echo $contact['company']; ?>
-                        </td>
-                        <td>
-                            <?php echo $contact['_type']; ?>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
-
->>>>>>> 2ca7da32b8533a601874add865cd59a245046786:php/dashboard.php
 
 </body>
 
