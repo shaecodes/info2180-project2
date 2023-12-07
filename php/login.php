@@ -27,23 +27,20 @@ if ($conn->connect_error){
         
         // Check if the entered password matches the hashed password in the database
         if (password_verify($password_filter, $data['pwd'])) {
-            if ($data['_role'] === "Admin"){
-                echo "<h1>Login Successfully</h1>";
-                header("Refresh:1, url=../pages/users.html");
-            // Set session variables
-            $_SESSION['user_id'] = $data['user_id'];
-            $_SESSION['user_email'] = $data['email'];
-            $_SESSION['user_role'] = $data['_role'];
+                // Set session variables
+                $_SESSION['user_id'] = $data['id'];
+                $_SESSION['user_email'] = $data['email'];
+                $_SESSION['user_role'] = $data['_role'];
 
-            if ($_SESSION['user_role'] === "Admin"){
-                echo "<script>alert('Login Successfully')</script>";
-                header("Refresh:1, url=../pages/dashboard.php");
+                if ($_SESSION['user_role'] === "Admin"){
+                    echo "<h1>Login Successfully</h1>";
+                    header("Refresh:1, url=dashboard.php");
 
                 // should navigate to the dashboard page once created
-            } else {
-                echo "<h1>Restricted Access. Go Back</h1>";
-                header("Refresh:1, url=../pages/login.html");
-            } 
+                } else {
+                    echo "<h1>Restricted Access. Go Back</h1>";
+                    header("Refresh:1, url=../pages/login.html");
+                } 
         } else {
             echo "<h1>Invalid Password</h1>";
             header("Refresh:1, url=../pages/login.html");

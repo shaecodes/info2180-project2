@@ -55,7 +55,7 @@ function fetchContacts()
     <script>
         function addContact() {
             // Redirect to contact.html
-            window.location.href = 'contacts.html';
+            window.location.href = '../pages/contacts.html';
         }
 
         const contacts = [
@@ -69,7 +69,7 @@ function fetchContacts()
 
 <body>
     <header>
-    <?php include('../php/header.php');?>
+    <?php include('header.php');?>
         <h1>Dashboard</h1>
         <button class="add-contact-btn" onclick="addContact()">&#43; Add Contact</button>
     </header>

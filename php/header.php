@@ -1,6 +1,6 @@
 <nav>
-    <a href="#">Home</a>
-    <a href="contacts.html">New Contact</a>
-    <a href="users.html">Users</a>
-    <a href="login.html">Logout</a>
+    <a href="../php/dashboard.php">Home</a>
+    <a href="../pages/contacts.html">New Contact</a>
+    <a href="../pages/users.html">Users</a>
+    <a href="../pages/login.html">Logout</a>
 </nav>
