@@ -1,4 +1,6 @@
 <?php
+session_start(); // Start the session
+
 $host = 'localhost';
 $username = 'proj2_user';
 $password = 'groupbest1234';
@@ -28,6 +30,14 @@ if ($conn->connect_error){
             if ($data['_role'] === "Admin"){
                 echo "<h1>Login Successfully</h1>";
                 header("Refresh:1, url=../pages/users.html");
+            // Set session variables
+            $_SESSION['user_id'] = $data['user_id'];
+            $_SESSION['user_email'] = $data['email'];
+            $_SESSION['user_role'] = $data['_role'];
+
+            if ($_SESSION['user_role'] === "Admin"){
+                echo "<script>alert('Login Successfully')</script>";
+                header("Refresh:1, url=../pages/dashboard.php");
 
                 // should navigate to the dashboard page once created
             } else {
@@ -43,9 +53,7 @@ if ($conn->connect_error){
         header("Refresh:1, url=../pages/login.html");
     }
     
-    
     $stmt->close();
     $conn->close();
 }
-
 ?>
