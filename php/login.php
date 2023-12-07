@@ -27,10 +27,10 @@ if ($conn->connect_error){
         
         // Check if the entered password matches the hashed password in the database
         if (password_verify($password_filter, $data['pwd'])) {
-                // Set session variables
-                $_SESSION['user_id'] = $data['id'];
-                $_SESSION['user_email'] = $data['email'];
-                $_SESSION['user_role'] = $data['_role'];
+            // Set session variables
+            $_SESSION['user_id'] = $data['id'];
+            $_SESSION['user_email'] = $data['email'];
+            $_SESSION['user_role'] = $data['_role'];
 
                 if ($_SESSION['user_role'] === "Admin"){
                     echo "<h1>Login Successfully</h1>";
