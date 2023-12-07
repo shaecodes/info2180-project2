@@ -28,8 +28,9 @@ if ($conn->connect_error){
         // Check if the entered password matches the hashed password in the database
         if (password_verify($password_filter, $data['pwd'])) {
             // Set session variables
-            $_SESSION['user_id'] = $data['id'];
-            $_SESSION['user_email'] = $data['email'];
+            $_SESSION['first_name'] = $data['firstname'];
+            $_SESSION['last_name'] = $data['lastname'];
+            $_SESSION['full_name'] = $_SESSION['first_name'] . ' ' . $_SESSION['last_name'];
             $_SESSION['user_role'] = $data['_role'];
 
             if ($_SESSION['user_role'] === "Admin"){

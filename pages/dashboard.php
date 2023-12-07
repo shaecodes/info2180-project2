@@ -1,6 +1,6 @@
 <?php
 session_start();
-echo $_SESSION['user_id'];
+echo $_SESSION['full_name'];
 
 function connectToDatabase()
 {
@@ -76,7 +76,7 @@ function fetchContacts()
     </header>
 
     <?php
-    if (isset($_SESSION['user_id'])) {
+    if (isset($_SESSION['full_name'])) {
         echo '<div id="contacts" action="">
             <table>
                 <thead>
