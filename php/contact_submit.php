@@ -14,6 +14,7 @@ $telephone = $_POST["t_phone"] ?? '';
 $company = $_POST["company"] ?? '';
 $type = $_POST["type"] ?? '';
 $assign = intval($_POST['assign_user'] ?? '0');
+$created_by_user = $_SESSION['user_id'] ?? '';
 
 $title_fil = filter_var($title, FILTER_SANITIZE_STRING);
 $fname_fil = filter_var($fname, FILTER_SANITIZE_STRING);
@@ -26,7 +27,7 @@ $assign_fil = filter_var($assign, FILTER_SANITIZE_NUMBER_INT);
 
 $conn = new mysqli($host, $username, $password, $dbname);
 
-$sql = "INSERT INTO Contacts (title, firstname, lastname, email, telephone, company, _type, assigned_to) VALUES (?,?,?,?,?,?,?,?)";
+$sql = "INSERT INTO Contacts (title, firstname, lastname, email, telephone, company, _type, assigned_to, created_by) VALUES (?,?,?,?,?,?,?,?,?)";
 
 $stmt = $conn->prepare($sql);
 
@@ -34,7 +35,7 @@ if (!$stmt) {
     die("Error in the SQL query: " . $conn->error);
 }
 
-if(!$stmt->bind_param("sssssssi",$title_fil,$fname_fil,$lname_fil,$email_fil,$telephone_fil,$company_fil,$type_fil,$assign_fil)){
+if(!$stmt->bind_param("sssssssii",$title_fil,$fname_fil,$lname_fil,$email_fil,$telephone_fil,$company_fil,$type_fil,$assign_fil,$created_by_user)){
     die("Error binding parameters: " . $stmt->error);
 }
 
