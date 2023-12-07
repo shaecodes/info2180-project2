@@ -20,7 +20,7 @@ function connectToDatabase()
     return $conn;
 }
 
-function fetchContacts()
+function fetchContacts($filter = "")
 {
     $conn = connectToDatabase();
 
@@ -28,6 +28,23 @@ function fetchContacts()
 
     // Fetch data from the "Contacts" table
     $sql = "SELECT title, firstname, lastname, email, company, _type FROM Contacts";
+    $result = $conn->query($sql);
+
+    if ($filter) {
+        switch ($filter) {
+            case 'Sales Leads':
+                $sql .= " WHERE _type = 'Sales Lead'";
+                break;
+            case 'Support':
+                $sql .= " WHERE _type = 'Support'";
+                break;
+            case 'Assigned to me':
+                // Assuming you have a logged-in user, replace 'username' with the actual column name
+                $sql .= " WHERE assigned_user = 'username'";
+                break;
+        }
+    }
+
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -42,6 +59,9 @@ function fetchContacts()
     return $contacts;
 }
 
+// Check if a filter is selected
+$filter = isset($_GET['filter']) ? $_GET['filter'] : "";
+$contacts = fetchContacts($filter);
 ?>
 
 
@@ -56,15 +76,21 @@ function fetchContacts()
 
     <script>
         function addContact() {
-            // Redirect to contact.html
-            window.location.href = '../pages/contacts.html';
+        // Navigate to the contact page (contacts.html)
+        window.location.assign('../pages/contacts.html');
         }
+
 
         const contacts = [
             { title: 'Mr', fullName: 'John Doe', email: 'john.doe@example.com', company: 'ABC Inc.', type: 'Sales Lead' },
             // List for Contacts
         ];
 
+        function applyFilter() {
+            var filter = document.getElementById('contactFilter').value;
+            var url = 'dashboard.php?filter=' + filter;
+            window.location.href = url;
+        }
 
     </script>
 </head>
@@ -73,36 +99,62 @@ function fetchContacts()
     <header>
     <?php include('header.php');?>
         <h1>Dashboard</h1>
-        <button class="add-contact-btn" onclick="addContact()">&#43; Add Contact</button>
     </header>
 
     <?php
-    if (isset($_SESSION['full_name'])) {
-        echo '<div id="contacts" action="">
-            <table>
-                <thead>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Company</th>
-                    <th>Type</th>
-                </thead>
-                <tbody>';
-        $contacts = fetchContacts(); // You need to implement the fetchContacts() function
-        foreach ($contacts as $contact) {
-            echo '<tr>
-                <td>' . $contact['title'] . ' ' . $contact['firstname'] . ' ' . $contact['lastname'] . '</td>
-                <td>' . $contact['email'] . '</td>
-                <td>' . $contact['company'] . '</td>
-                <td>' . $contact['_type'] . '</td>
-            </tr>';
-        }
-        echo '</tbody>
-            </table>
-        </div>';
-    } else {
-        echo '<p>Please <a href="../pages/login.html">log in</a> to view the user table.</p>';
-    }
+    // Check if the session variable 'full_name' is set
+    $fullName = isset($_SESSION['full_name']) ? $_SESSION['full_name'] : null;
     ?>
+
+    <?php if ($fullName): ?>
+        <button class="add-contact-btn" onclick="addContact()">&#43; Add Contact</button>
+    <?php endif; ?>
+
+    <div id="contacts" action="">
+    <header>
+            <form method="post" action="">
+                <label for="filter">Filter:</label>
+                <select id="filter" name="filter" onchange="this.form.submit()">
+                    <option value="All Contacts">All Contacts</option>
+                    <option value="Sales Leads">Sales Leads</option>
+                    <option value="Support">Support</option>
+                    <option value="Assigned to me">Assigned to me</option>
+                </select>
+            </form>
+        </header>
+
+
+        <table>
+            <thead>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Company</th>
+                <th>Type</th>
+            </thead>
+            <tbody>
+
+                <?php $filter = isset($_POST['filter']) ? $_POST['filter'] : null; ?>
+                <?php $contacts = fetchContacts($filter); ?>
+                <?php foreach ($contacts as $contact): ?>
+                    <tr>
+                        <td>
+                            <?php echo $contact['title'] . ' ' . $contact['firstname'] . ' ' . $contact['lastname']; ?>
+                        </td>
+                        <td>
+                            <?php echo $contact['email']; ?>
+                        </td>
+                        <td>
+                            <?php echo $contact['company']; ?>
+                        </td>
+                        <td>
+                            <?php echo $contact['_type']; ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+
 
 </body>
 
