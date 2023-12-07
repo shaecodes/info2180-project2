@@ -39,9 +39,12 @@ function fetchContacts($filter = "")
                 $sql .= " WHERE _type = 'Support'";
                 break;
             case 'Assigned to me':
-                // Assuming you have a logged-in user, replace 'username' with the actual column name
-                $sql .= " WHERE assigned_user = 'username'";
-                break;
+                $user_id = $_SESSION['user_id'] ?? null;
+                if ($user_id) {
+                    // echo $user_id;
+                    $sql .= " WHERE assigned_user = '$user_id'";
+                }
+            break;
         }
     }
 
@@ -122,8 +125,6 @@ $contacts = fetchContacts($filter);
                 </select>
             </form>
         </header>
-
-
         <table>
             <thead>
                 <th>Name</th>
@@ -132,7 +133,6 @@ $contacts = fetchContacts($filter);
                 <th>Type</th>
             </thead>
             <tbody>
-
                 <?php $filter = isset($_POST['filter']) ? $_POST['filter'] : null; ?>
                 <?php $contacts = fetchContacts($filter); ?>
                 <?php foreach ($contacts as $contact): ?>
@@ -154,8 +154,5 @@ $contacts = fetchContacts($filter);
             </tbody>
         </table>
     </div>
-
-
 </body>
-
 </html>
