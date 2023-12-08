@@ -11,6 +11,22 @@ $contactDetails = fetchcontactDetails($contactId);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $contactDetails['title'] . ' ' . $contactDetails['firstname'] . ' ' . $contactDetails['lastname']; ?></title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        function switchRole() {
+            $.ajax({
+                type: 'POST',
+                url: 'switchRole.php',
+                data: { contactId: <?php echo $contactDetails['id']; ?> },
+                success: function(response) {
+                    $('#switchRoleBtn').text(' Switch to ' + response);
+                },
+                error: function(error) {
+                    console.error('Error switching role: ' + error.responseText);
+                }
+            });
+        }
+    </script>
 </head>
 <header>
     <?php include('header.php');?>
@@ -19,6 +35,8 @@ $contactDetails = fetchcontactDetails($contactId);
     <div class = "">
         <img src = "" alt= "person icon">
         <h2><?php echo $contactDetails['title'] . ' ' . $contactDetails['firstname'] . ' ' . $contactDetails['lastname']; ?></h2>
+        <button> Assign To Me</button>
+        <button id="switchRoleBtn" onclick="switchRole()"> Switch to <?php echo switchRoleText($contactDetails['_type']); ?></button>
         <p> Created on <?php echo (new DateTime($contactDetails['created_at']))->format('F j, Y'); ?></p>
         <p> <?php echo formatDateTime($contactDetails['updated_at'], $contactDetails['created_at']); ?></p>
     </div>
@@ -109,14 +127,21 @@ function fetchcontactDetails($contactId) {
 function formatDateTime($dateTimeString, $created_dateTimeString) {
     $dateTime = new DateTime($dateTimeString);
     $created_dateTime = new DateTime($created_dateTimeString);
-    // Check if the year is negative
     if ($dateTime->format('Y') < 0) {
-        // Use created_at instead of updated_at
         return "Updated on " . $created_dateTime->format('F j, Y');
     }
-
-    // Use updated_at
     return $dateTime->format('F j, Y');
+}
+
+function switchRoleText($currentRole) {
+    switch ($currentRole) {
+        case 'Sales Lead':
+            return 'Support';
+        case 'Support':
+            return 'Sales Lead';
+        default:
+            return 'Unknown Role';
+    }
 }
 
 ?>
