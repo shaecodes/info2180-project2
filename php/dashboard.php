@@ -1,6 +1,5 @@
 <?php
 session_start();
-echo $_SESSION['full_name'];
 
 function connectToDatabase()
 {
@@ -83,6 +82,10 @@ $contacts = fetchContacts($filter);
         window.location.assign('../pages/contacts.html');
         }
 
+        function contactDetail($fullName) {
+            // Your contact detail logic here
+            console.log('Viewing details for: ' + fullName);
+        }
 
         const contacts = [
             { title: 'Mr', fullName: 'John Doe', email: 'john.doe@example.com', company: 'ABC Inc.', type: 'Sales Lead' },
@@ -131,25 +134,32 @@ $contacts = fetchContacts($filter);
                 <th>Email</th>
                 <th>Company</th>
                 <th>Type</th>
+                <th> </th>
             </thead>
             <tbody>
                 <?php $filter = isset($_POST['filter']) ? $_POST['filter'] : null; ?>
                 <?php $contacts = fetchContacts($filter); ?>
                 <?php foreach ($contacts as $contact): ?>
-                    <tr>
-                        <td>
-                            <?php echo $contact['title'] . ' ' . $contact['firstname'] . ' ' . $contact['lastname']; ?>
-                        </td>
-                        <td>
-                            <?php echo $contact['email']; ?>
-                        </td>
-                        <td>
-                            <?php echo $contact['company']; ?>
-                        </td>
-                        <td>
-                            <?php echo $contact['_type']; ?>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                        <?php echo $contact['title'] . ' ' . $contact['firstname'] . ' ' . $contact['lastname']; ?>
+                    </td>
+                    <td>
+                        <?php echo $contact['email']; ?>
+                    </td>
+                    <td>
+                        <?php echo $contact['company']; ?>
+                    </td>
+                    <td>
+                        <?php
+                            $fullName = $contact['title'] . ' ' . $contact['firstname'] . ' ' . $contact['lastname'];
+                            echo $contact['_type'];
+                        ?>
+                    </td>
+                    <td>
+                        <button type="button">View</button>
+                    </td>
+                </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
