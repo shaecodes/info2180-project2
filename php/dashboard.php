@@ -25,8 +25,7 @@ function fetchContacts($filter = "")
 
     $contacts = [];
 
-    // Fetch data from the "Contacts" table
-    $sql = "SELECT title, firstname, lastname, email, company, _type FROM Contacts";
+    $sql = "SELECT id, title, firstname, lastname, email, company, _type FROM Contacts";
     $result = $conn->query($sql);
 
     if ($filter) {
@@ -40,7 +39,6 @@ function fetchContacts($filter = "")
             case 'Assigned to me':
                 $user_id = $_SESSION['user_id'] ?? null;
                 if ($user_id) {
-                    // echo $user_id;
                     $sql .= " WHERE assigned_user = '$user_id'";
                 }
             break;
@@ -50,7 +48,6 @@ function fetchContacts($filter = "")
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        // Output data of each row
         while ($row = $result->fetch_assoc()) {
             $contacts[] = $row;
         }
@@ -82,11 +79,6 @@ $contacts = fetchContacts($filter);
         window.location.assign('../pages/contacts.html');
         }
 
-        function contactDetail($fullName) {
-            // Your contact detail logic here
-            console.log('Viewing details for: ' + fullName);
-        }
-
         const contacts = [
             { title: 'Mr', fullName: 'John Doe', email: 'john.doe@example.com', company: 'ABC Inc.', type: 'Sales Lead' },
             // List for Contacts
@@ -96,6 +88,10 @@ $contacts = fetchContacts($filter);
             var filter = document.getElementById('contactFilter').value;
             var url = 'dashboard.php?filter=' + filter;
             window.location.href = url;
+        }
+
+        function viewDetails(contactId) {
+            window.location.href = 'contact_details.php?id=' + contactId;
         }
 
     </script>
@@ -151,13 +147,11 @@ $contacts = fetchContacts($filter);
                         <?php echo $contact['company']; ?>
                     </td>
                     <td>
-                        <?php
-                            $fullName = $contact['title'] . ' ' . $contact['firstname'] . ' ' . $contact['lastname'];
-                            echo $contact['_type'];
-                        ?>
+                        <?php echo $contact['_type'];  ?>
                     </td>
                     <td>
-                        <button type="button">View</button>
+                        <button type="button" onclick="viewDetails(<?php echo $contact['id']; ?>)">View</button>
+                    </td>
                     </td>
                 </tr>
                 <?php endforeach; ?>
