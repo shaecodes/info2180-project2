@@ -115,13 +115,11 @@ $contacts = fetchContacts($filter);
     <div id="contacts" action="">
     <header>
             <form method="post" action="">
-                <label for="filter">Filter:</label>
-                <select id="filter" name="filter" onchange="this.form.submit()">
-                    <option value="All Contacts">All Contacts</option>
-                    <option value="Sales Leads">Sales Leads</option>
-                    <option value="Support">Support</option>
-                    <option value="Assigned to me">Assigned to me</option>
-                </select>
+                <label><i class="fa fa-filter" style="font-size:24px"></i> Filter By:</label>
+                <button type="submit" name="filter" value="All Contacts">All</button>
+                <button type="submit" name="filter" value="Sales Leads">Sales Leads</button>
+                <button type="submit" name="filter" value="Support">Support</button>
+                <button type="submit" name="filter" value="Assigned to me">Assigned to me</button>
             </form>
         </header>
         <table>

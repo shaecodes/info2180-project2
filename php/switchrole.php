@@ -6,6 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['contactId'])) {
 
     // Return the new role to update the button text
     echo $newRole;
+
 } else {
     echo 'Invalid request';
 }

@@ -59,18 +59,9 @@ $contactDetails = fetchcontactDetails($contactId);
         <img src = "" alt = "notes icon">
         <h2> Notes </h2>
         <div class = "note">
-            <h3> Jane Doe </h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea fuga ab nisi placeat sed harum architecto? Nostrum labore impedit illo reprehenderit, velit explicabo numquam natus asperiores iusto odio doloremque repudiandae.<p>
-            <p>November 10, 2022 6:35 pm </p>
-        </div>
-        <div class = "note">
-            <h3> Jane Doe </h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea fuga ab nisi placeat sed harum architecto? Nostrum labore impedit illo reprehenderit, velit explicabo numquam natus asperiores iusto odio doloremque repudiandae.<p>
-            <p>November 10, 2022 6:35 pm </p>
-        </div>
-        <div class = "note">
             <h3> Add a note about <?php echo $contactDetails['firstname'] ?></h3>
             <textarea></textarea>
+            <button>Submit</button>
         </div>
     </div>
 </body>
