@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New User</title>
 </head>
-<body>
     <header>
-        <img src="#" alt="">
-        <p>Dolphin CRM</p>
+        <?php 
+            include '../php/header.php';
+            session_start();
+        ?>
     </header>
-    
-    <?php 
-        include '../php/header.php';
-        session_start();
-    ?>
+<body>
 
     <h1>New User</h1>
 

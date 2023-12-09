@@ -4,79 +4,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/contacts.css">
     <script src="../script/contacts.js" type="text/javascript"></script>
     <title>Contact</title>
 </head>
 
 <body>
-    <header id="title">
-        <img src="#" alt="">
-        <p>Dolphin CRM</p>
+    <header>
+        <?php 
+            include '../php/header.php';
+            session_start();
+        ?>
     </header>
 
-    <?php 
-        include '../php/header.php';
-        session_start();
-    ?>
+    <div class="container">
     
     <h1>New Contact</h1>
 
     <div class="contact">
 
         <form method="post" action="../php/contacts.php" id="contact">
+            
+            <div class="inputs">
             <label for="title">Title</label>
-            <br>
             <select id="title" name="title" required>
                 <option value="">---</option>
                 <option value="Mr">Mr</option>
                 <option value="Ms">Ms</option>
                 <option value="Mrs">Mrs</option>
             </select>
-
-            <br><br><br>
-
-            <label for="Fname">First Name</label>
             <br>
-            <input type="text" name="fname" id="first_name" placeholder="First Name" required>
+            </div>  
 
-            <label for="Lname">Last Name</label>
+
+            <div class="inputs">
+                <label for="Fname">First Name</label>
+                <input type="text" name="fname" id="first_name" placeholder="First Name" required>
+                <br>
+            </div>
+            
+            <div class="inputs">
+                <label for="Lname">Last Name</label>
+                <input type="text" name="lname" id="last_name" placeholder="Last Name" required>
+                <br>
+            </div>
+
+
+            <div class="inputs">
+                <label for="Email">Email</label>
+                <input type="email" name="email" id="email_address" placeholder="something@example.com" required>
+                <br>
+            </div>
+
+            <div class="inputs">
+
+                <label for="Telephone">Telephone  (Format: 876-123-4567)</label>
+                <input type="tel" name="t_phone" id="telephone_num" placeholder="876-123-4567" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+                <br>
+            </div>
+
+            <div class="inputs">
+                <label for="Company">Company</label>
+                <input type="text" name="company" id="company" placeholder="Gace Bennedy" required>
+                <br>
+            </div>
+
+            <div class="inputs">
+                <label for="Type">Type</label>
+                <select id="type" name="type" required>
+                    <option value="">---</option>
+                    <option value="Sales Lead">Sales Lead</option>
+                    <option value="Support">Support</option>
+                </select>
+            </div>
+
+            <div class="inputs">
+                
+                <label for="Assigned">Assigned To</label>
+                <select id="assign_user" name="assign_user" required></select>
+            </div>
+
             <br>
-            <input type="text" name="lname" id="last_name" placeholder="Last Name" required>
-
-            <br><br><br>
-
-            <label for="Email">Email</label>
-            <br>
-            <input type="email" name="email" id="email_address" placeholder="something@example.com" required>
-
-            <label for="Telephone">Telephone  (Format: 876-123-4567)</label>
-            <br>
-            <input type="tel" name="t_phone" id="telephone_num" placeholder="876-123-4567" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
-
-
-            <br><br><br>
-
-            <label for="Company">Company</label>
-            <br>
-            <input type="text" name="company" id="company" placeholder="Gace Bennedy" required>
-
-            <label for="Type">Type</label>
-            <br>
-            <select id="type" name="type" required>
-                <option value="">---</option>
-                <option value="Sales Lead">Sales Lead</option>
-                <option value="Support">Support</option>
-            </select>
-
-            <br><br><br>
-
-            <label for="Assigned">Assigned To</label>
-            <br>
-            <select id="assign_user" name="assign_user" required></select>
-
             <input type="submit" name="submit" value="Submit">
     </div>
 
 </body>
+</div>
 
 </html>
