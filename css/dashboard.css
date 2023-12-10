@@ -5,7 +5,7 @@ body{
 
 #contacts {
     display: flex;
-    align-items: center;
+    /*align-items: center;*/
     background-color: white;
     border-radius: 5px;
     padding: 20px;
@@ -15,10 +15,15 @@ body{
     height: 100vh;
 }
 
-#contacts h1 {
+div#header-info h1 {
     color: rgb(42, 85, 211);
     text-align: center;
+    clear:right;
     font-size: 45px;
+}
+
+button.add-contact-btn{
+    float: right;
 }
 
 table{
@@ -38,6 +43,12 @@ table{
         border: 1px solid rgb(222, 222, 222);
         padding: 10px
     }
+
+#form-info{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 
 form button, body button{

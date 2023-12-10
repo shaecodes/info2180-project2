@@ -26,7 +26,6 @@ function fetchContacts($filter = "")
     $contacts = [];
 
     $sql = "SELECT id, title, firstname, lastname, email, company, _type FROM Contacts";
-    $result = $conn->query($sql);
 
     if ($filter) {
         switch ($filter) {
@@ -39,7 +38,7 @@ function fetchContacts($filter = "")
             case 'Assigned to me':
                 $user_id = $_SESSION['user_id'] ?? null;
                 if ($user_id) {
-                    $sql .= " WHERE assigned_user = '$user_id'";
+                    $sql .= " WHERE assigned_to = '$user_id'";
                 }
             break;
         }
@@ -109,12 +108,15 @@ $contacts = fetchContacts($filter);
     $fullName = isset($_SESSION['full_name']) ? $_SESSION['full_name'] : null;
     ?>
 
+    
+
+    <div id="contacts" action="">
+    <div id="header-info">
     <?php if ($fullName): ?>
         <button class="add-contact-btn" onclick="addContact()">&#43; Add Contact</button>
     <?php endif; ?>
-
-    <div id="contacts" action="">
-    <h1>Dashboard</h1>
+    <h1>Dashboard</h1></div>
+    <div id="form-info">
     <header>
             <form method="post" action="">
                 <label><i class="fa fa-filter" style="font-size:24px"></i> Filter By:</label>
@@ -124,6 +126,7 @@ $contacts = fetchContacts($filter);
                 <button type="submit" name="filter" value="Assigned to me">Assigned to me</button>
             </form>
         </header>
+    </div>
         <table>
             <thead>
                 <th>Name</th>
