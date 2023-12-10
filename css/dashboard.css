@@ -40,7 +40,7 @@ table{
     }
 
 
-form button, body button{
+form button, .add-contact-btn{
     padding: 10px 15px;
     border-radius: 5px;
     border: 1px solid rgb(222, 222, 222);
@@ -48,7 +48,7 @@ form button, body button{
     color: rgb(42, 85, 211);
     font-weight: bold;
 }
-form button:hover, body button:hover{
+form button:hover, .add-contact-btn:hover{
     background-color:rgb(188, 211, 238);
     cursor: pointer;
 }
