@@ -35,7 +35,19 @@ if ($conn->connect_error){
             $_SESSION['user_role'] = $data['_role'];
 
                 if ($_SESSION['user_role'] === "Admin"){
-                    echo "<h1>Login Successfully</h1>";
+                   /* echo "<script>var div = document.getElementByClassName('container');
+                    var popup = document.createElement('div');
+                    popup.setAttribute('class', 'popup');
+                    var para = document.createElement('p');
+                    p.innerHTML = 'Login Successfully';
+                    popup.appendChild(para);
+                    div.appendChild(popup);
+                    </script>";
+                    echo "y";*/
+                    echo '<script>
+                document.getElementById("login-success-popup").style.display = "block";
+              </script>';
+                    //echo "<h1>Login Successfully</h1>";
                     header("Refresh:1, url=dashboard.php");
 
                 // should navigate to the dashboard page once created
