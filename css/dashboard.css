@@ -1,0 +1,54 @@
+body{
+    background-color: rgb(218, 232, 248);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#contacts {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 0 auto;
+    margin-top: 10px;
+    flex-direction: column;
+    height: 100vh;
+}
+
+#contacts h1 {
+    color: rgb(42, 85, 211);
+    text-align: center;
+    font-size: 45px;
+}
+
+table{
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse; 
+    border-spacing: 0; 
+    border-radius: 5px;
+}
+    th{
+        background-color: rgb(42, 85, 211);
+        color: white;
+        font-weight: bold;
+        font-style: italic;
+    }
+    th, td {
+        border: 1px solid rgb(222, 222, 222);
+        padding: 10px
+    }
+
+
+form button{
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid rgb(222, 222, 222);
+    background-color: rgb(218, 232, 248);
+    color: rgb(42, 85, 211);
+    font-weight: bold;
+}
+form button:hover{
+    background-color:rgb(188, 211, 238);
+    cursor: pointer;
+}

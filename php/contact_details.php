@@ -12,6 +12,7 @@ $contactDetails = fetchcontactDetails($contactId);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $contactDetails['title'] . ' ' . $contactDetails['firstname'] . ' ' . $contactDetails['lastname']; ?></title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="../css/contact_details.css">
     <script>
         function switchRole() {
             $.ajax({
@@ -32,7 +33,7 @@ $contactDetails = fetchcontactDetails($contactId);
     <?php include('header.php');?>
     </header>
 <body>
-    <div class = "">
+    <div class = "person">
         <img src = "" alt= "person icon">
         <h2><?php echo $contactDetails['title'] . ' ' . $contactDetails['firstname'] . ' ' . $contactDetails['lastname']; ?></h2>
         <button> Assign To Me</button>

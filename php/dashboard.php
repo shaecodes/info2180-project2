@@ -71,6 +71,8 @@ $contacts = fetchContacts($filter);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/dashboard.css">
+
     <title>Dolphin CRM Dashboard</title>
 
     <script>
@@ -100,7 +102,6 @@ $contacts = fetchContacts($filter);
 <body>
     <header>
     <?php include('header.php');?>
-        <h1>Dashboard</h1>
     </header>
 
     <?php
@@ -113,6 +114,7 @@ $contacts = fetchContacts($filter);
     <?php endif; ?>
 
     <div id="contacts" action="">
+    <h1>Dashboard</h1>
     <header>
             <form method="post" action="">
                 <label><i class="fa fa-filter" style="font-size:24px"></i> Filter By:</label>

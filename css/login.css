@@ -4,7 +4,7 @@ body{
     height: 69vh;
 }
 
-.container {
+.container{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,6 +20,11 @@ body{
 form{
     width: 80%;
     justify-content: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    width:80%;
+
 }
     form h1 {
         color: rgb(42, 85, 211);
@@ -27,19 +32,13 @@ form{
         font-size: 45px;
     }
 
-.inputs{
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-    width:100%
-}
-    .inputs label{
+    form label{
         margin-right: 10px;
         margin-bottom: 5px;
         font-weight: bold;
         font-style: italic;
     }
-    .inputs input{
+    form input{
         padding: 5px;
         border-radius: 5px;
         height: 30px;
@@ -53,6 +52,7 @@ button{
     background-color: rgb(42, 85, 211);
     color: white;
     font-weight: bold;
+    width: fit-content;
 }
 button:hover{
     background-color: rgb(50, 96, 235);

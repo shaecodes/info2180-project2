@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/new_user.css">
     <title>New User</title>
 </head>
     <header>
@@ -13,19 +14,21 @@
     </header>
 <body>
 
+    <div class="users">
     <h1>New User</h1>
 
-    <div class="users">
         <form action="../php/new_user.php" method="post" class = "new_user">
             <label for="firstName">First Name</label>
             <input type="text" id="firstName" name="firstName">
+            <br>
 
             <label for="lastName">Last Name</label>
             <input type="text" id="lastName" name="lastName">
-            <br><br>
+            <br>
 
             <label for="email">Email</label>
             <input type="email" id="email" name="email">
+            <br>
 
             <label for="password">Password</label>
             <input type="password" id="password" name="password">
@@ -36,6 +39,8 @@
                 <option value="Member">Member</option>
                 <option value="Admin">Admin</option>
             </select>
+
+            <br>
             <button type="submit">Save</button>
         </form>
     </div>
