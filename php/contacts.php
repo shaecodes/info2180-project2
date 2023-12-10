@@ -4,7 +4,7 @@ $host = "localhost";
 $username = "proj2_user";
 $password = "groupbest1234";
 $dbname = "dolphin_crm";
-$options = '<option value="">---</option>';
+$options = '<option value=""></option>';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include 'contact_submit.php';

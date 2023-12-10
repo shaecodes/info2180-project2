@@ -28,7 +28,7 @@ CREATE TABLE Contacts (
     assigned_to INTEGER,
     created_by INTEGER,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (assigned_to) REFERENCES Users(id),
     FOREIGN KEY (created_by) REFERENCES Users(id)
 );
