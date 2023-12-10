@@ -153,7 +153,7 @@ $contacts = fetchContacts($filter);
                         <?php echo $contact['_type'];  ?>
                     </td>
                     <td>
-                        <button type="button" onclick="viewDetails(<?php echo $contact['id']; ?>)">View</button>
+                        <button type="button" class = "view-contact-btn" onclick="viewDetails(<?php echo $contact['id']; ?>)">View</button>
                     </td>
                     </td>
                 </tr>
