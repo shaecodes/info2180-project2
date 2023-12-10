@@ -109,12 +109,17 @@ $contacts = fetchContacts($filter);
     $fullName = isset($_SESSION['full_name']) ? $_SESSION['full_name'] : null;
     ?>
 
-    <?php if ($fullName): ?>
+    <!-- <?php if ($fullName): ?>
         <button class="add-contact-btn" onclick="addContact()">&#43; Add Contact</button>
-    <?php endif; ?>
+    <?php endif; ?> -->
 
     <div id="contacts" action="">
     <h1>Dashboard</h1>
+
+        <?php if ($fullName): ?>
+            <button class="add-contact-btn" onclick="addContact()">&#43; Add Contact</button>
+        <?php endif; ?>
+
     <header>
             <form method="post" action="">
                 <label><i class="fa fa-filter" style="font-size:24px"></i> Filter By:</label>
@@ -157,6 +162,7 @@ $contacts = fetchContacts($filter);
                 <?php endforeach; ?>
             </tbody>
         </table>
+        
     </div>
 </body>
 </html>
