@@ -39,9 +39,5 @@ CREATE TABLE Notes (
     comment TEXT NOT NULL,
     created_by INT,
     FOREIGN KEY (created_by) REFERENCES Users(id),
-    created_at DATETIME NOT NULL
+    created_at DATETIME NOT NULL CURRENT_TIMESTAMP
 );
-
-INSERT INTO Notes (contact_id, comment, created_by, created_at) VALUES
-(2, 'This is a placeholder comment for John Brown.', 1, CURRENT_TIMESTAMP),
-(3, 'Another placeholder comment for Mary White.', 1, CURRENT_TIMESTAMP);

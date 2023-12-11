@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 
 function addNoteToDatabase($contactId, $newNote, $current_user) {
-    $query = "INSERT INTO Notes (contact_id, comment, created_by) VALUES (?, ?, ?)";
+    $query = "INSERT INTO Notes (contact_id, comment, created_by, created_at) VALUES (?, ?, ?, CURRENT_TIMESTAMP)";
     $conn = connectToDatabase();
     $statement = $conn->prepare($query);
 
@@ -36,77 +36,32 @@ function addNoteToDatabase($contactId, $newNote, $current_user) {
 }
 
 
-?>
+function fetchNotesForContact($contactId) {
+    $query = "
+        SELECT notes.*, users.firstname AS creator_firstname, users.lastname AS creator_lastname
+        FROM Notes
+        JOIN Users ON notes.created_by = users.id
+        WHERE notes.contact_id = ?
+    ";
+    $conn = connectToDatabase();
+    $statement = $conn->prepare($query);
 
+    if (!$statement) {
+        die("Error in SQL query: " . $conn->error);
+    }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $contactDetails['title'] . ' ' . $contactDetails['firstname'] . ' ' . $contactDetails['lastname']; ?></title>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <link rel="stylesheet" href="../css/contact_details.css">
-    <script>
-        function switchRole() {
-            $.ajax({
-                type: 'POST',
-                url: 'switchRole.php',
-                data: { contactId: <?php echo $contactDetails['id']; ?> },
-                success: function(response) {
-                    $('#switchRoleBtn').text(' Switch to ' + response);
-                },
-                error: function(error) {
-                    console.error('Error switching role: ' + error.responseText);
-                }
-            });
-        }
-    </script>
-</head>
-<header>
-    <?php include('header.php');?>
-    </header>
-<body>
-    <div class = "">
-        <img src = "" alt= "person icon">
-        <h2><?php echo $contactDetails['title'] . ' ' . $contactDetails['firstname'] . ' ' . $contactDetails['lastname']; ?></h2>
-        <button> Assign To Me</button>
-        <button id="switchRoleBtn" onclick="switchRole()"> Switch to <?php echo switchRoleText($contactDetails['_type']); ?></button>
-        <p> Created on <?php echo (new DateTime($contactDetails['created_at']))->format('F j, Y'); ?></p>
-        <p> <?php echo formatDateTime($contactDetails['updated_at'], $contactDetails['created_at']); ?></p>
-    </div>
+    $statement->bind_param('i', $contactId);
 
-    <div class = "basic_info">
-        <p> Email </p>
-        <p><?php echo $contactDetails['email']; ?></p>
+    if (!$statement) {
+        die("Error binding parameters: " . $conn->error);
+    }
 
-        <p> Telephone </p>
-        <p><?php echo $contactDetails['telephone']; ?></p>
+    $statement->execute();
+    $result = $statement->get_result();
+    $notes = $result->fetch_all(MYSQLI_ASSOC);
 
-        <p> Company </p>
-        <p><?php echo $contactDetails['company']; ?></p>
-
-        <p> Assigned To </p>
-        <p><?php echo $contactDetails['assigned_firstname'] . ' ' . $contactDetails['assigned_lastname']; ?></p>
-
-    </div>
-
-    <div class = "notes">
-        <img src = "" alt = "notes icon">
-        <h2> Notes </h2>
-        <div class = "note">
-            <h3> Add a note about <?php echo $contactDetails['firstname'] ?></h3>
-            <form action="contact_details.php?id=<?php echo $contactId; ?>" method="post">
-                <label for="new_note">Enter a new note:</label>
-                <textarea id="new_note" name="new_note" required></textarea><br>
-                <button type="submit">Save Note</button>
-            </form>
-        </div>
-    </div>
-</body>
-</html>
-
-<?php
+    return $notes;
+}
 
 function connectToDatabase()
 {
@@ -173,5 +128,84 @@ function switchRoleText($currentRole) {
             return 'Unknown Role';
     }
 }
-
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?php echo $contactDetails['title'] . ' ' . $contactDetails['firstname'] . ' ' . $contactDetails['lastname']; ?></title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="../css/contact_details.css">
+    <script>
+        function switchRole() {
+            $.ajax({
+                type: 'POST',
+                url: 'switchRole.php',
+                data: { contactId: <?php echo $contactDetails['id']; ?> },
+                success: function(response) {
+                    $('#switchRoleBtn').text(' Switch to ' + response);
+                },
+                error: function(error) {
+                    console.error('Error switching role: ' + error.responseText);
+                }
+            });
+        }
+    </script>
+</head>
+<header>
+    <?php include('header.php');?>
+    </header>
+<body>
+    <div class = "">
+        <img src = "" alt= "person icon">
+        <h2><?php echo $contactDetails['title'] . ' ' . $contactDetails['firstname'] . ' ' . $contactDetails['lastname']; ?></h2>
+        <button> Assign To Me</button>
+        <button id="switchRoleBtn" onclick="switchRole()"> Switch to <?php echo switchRoleText($contactDetails['_type']); ?></button>
+        <p> Created on <?php echo (new DateTime($contactDetails['created_at']))->format('F j, Y'); ?></p>
+        <p> Updated on <?php echo formatDateTime($contactDetails['updated_at'], $contactDetails['created_at']); ?></p>
+    </div>
+
+    <div class = "basic_info">
+        <p> Email </p>
+        <p><?php echo $contactDetails['email']; ?></p>
+
+        <p> Telephone </p>
+        <p><?php echo $contactDetails['telephone']; ?></p>
+
+        <p> Company </p>
+        <p><?php echo $contactDetails['company']; ?></p>
+
+        <p> Assigned To </p>
+        <p><?php echo $contactDetails['assigned_firstname'] . ' ' . $contactDetails['assigned_lastname']; ?></p>
+
+    </div>
+
+    <div class="notes">
+    <img src="" alt="notes icon">
+    <h2>Notes</h2>
+    <?php
+    $contactNotes = fetchNotesForContact($contactId);
+    foreach ($contactNotes as $note) {
+        echo '<div class="note">';
+        echo '<p>' . $note['creator_firstname'] . ' ' . $note['creator_lastname'] . '</p>';
+        echo '<p>' . $note['comment'] . '</p>';
+        $createdTime = new DateTime($note['created_at']);
+        echo '<p>' . $createdTime->format('F j, Y ga') . '</p>'; // 'F j, Y ga' format includes month, day, year, and time
+        echo '</div>';
+    }
+    ?>
+
+
+    <div class="note">
+        <h3>Add a note about <?php echo $contactDetails['firstname'] ?></h3>
+        <form action="contact_details.php?id=<?php echo $contactId; ?>" method="post">
+            <label for="new_note">Enter a new note:</label>
+            <textarea id="new_note" name="new_note" required></textarea><br>
+            <button type="submit">Save Note</button>
+        </form>
+    </div> 
+</div>
+</body>
+</html>
