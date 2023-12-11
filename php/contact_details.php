@@ -1,10 +1,44 @@
 <?php
 session_start();
+// echo $_SESSION['user_id'];
 
 $contactId = isset($_GET['id']) ? $_GET['id'] : null;
 $contactDetails = fetchcontactDetails($contactId);
+$current_user = $_SESSION['user_id'];
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $newNote = isset($_POST['new_note']) ? $_POST['new_note'] : '';
+
+    if (!empty($newNote)) {
+        addNoteToDatabase($contactId, $newNote, $current_user);
+    }
+}
+
+function addNoteToDatabase($contactId, $newNote, $current_user) {
+    $query = "INSERT INTO Notes (contact_id, comment, created_by) VALUES (?, ?, ?)";
+    $conn = connectToDatabase();
+    $statement = $conn->prepare($query);
+
+    if (!$statement) {
+        die("Error in SQL query: " . $conn->error);
+    }
+
+    $statement->bind_param('iss', $contactId, $newNote, $current_user);
+
+    if (!$statement) {
+        die("Error binding parameters: " . $conn->error);
+    }
+
+    $statement->execute();
+
+    $statement->close();
+    $conn->close();
+}
+
 
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +67,7 @@ $contactDetails = fetchcontactDetails($contactId);
     <?php include('header.php');?>
     </header>
 <body>
-    <div class = "person">
+    <div class = "">
         <img src = "" alt= "person icon">
         <h2><?php echo $contactDetails['title'] . ' ' . $contactDetails['firstname'] . ' ' . $contactDetails['lastname']; ?></h2>
         <button> Assign To Me</button>
@@ -41,7 +75,7 @@ $contactDetails = fetchcontactDetails($contactId);
         <p> Created on <?php echo (new DateTime($contactDetails['created_at']))->format('F j, Y'); ?></p>
         <p> <?php echo formatDateTime($contactDetails['updated_at'], $contactDetails['created_at']); ?></p>
     </div>
-    
+
     <div class = "basic_info">
         <p> Email </p>
         <p><?php echo $contactDetails['email']; ?></p>
@@ -56,13 +90,17 @@ $contactDetails = fetchcontactDetails($contactId);
         <p><?php echo $contactDetails['assigned_firstname'] . ' ' . $contactDetails['assigned_lastname']; ?></p>
 
     </div>
+
     <div class = "notes">
         <img src = "" alt = "notes icon">
         <h2> Notes </h2>
         <div class = "note">
             <h3> Add a note about <?php echo $contactDetails['firstname'] ?></h3>
-            <textarea></textarea>
-            <button>Submit</button>
+            <form action="contact_details.php?id=<?php echo $contactId; ?>" method="post">
+                <label for="new_note">Enter a new note:</label>
+                <textarea id="new_note" name="new_note" required></textarea><br>
+                <button type="submit">Save Note</button>
+            </form>
         </div>
     </div>
 </body>
