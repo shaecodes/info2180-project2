@@ -1,1 +1,0 @@
-<?php echo "<script>document.getElementById('login-success-popup').style.display = 'block';</script>";

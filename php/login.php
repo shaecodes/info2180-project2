@@ -35,40 +35,17 @@ if ($conn->connect_error){
             $_SESSION['user_role'] = $data['_role'];
 
                 if ($_SESSION['user_role'] === "Admin"){
-                    echo json_encode("Login Successfully");
-                    /*echo '<style>.popup {
-                        display: block;
-                        position: fixed;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                        padding: 20px;
-                        background-color: black;
-                        background: #fff;
-                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                        z-index: 9999;
-                    }</style><div id="login-success-popup" class="popup">
-                    <?php
-                    // Include the PHP file to send echo to HTML
-                    include "log.php";
-                    ?>
-                  <p id="text">nm</p>
-                </div>';*/
-                    //echo "<h1>Login Successfully</h1>";
-                  header("Refresh:1, url=../pages/login.html");
+                    echo "Login Successfully!";
 
                 // should navigate to the dashboard page once created
                 } else {
-                    echo "<h1>Restricted Access. Go Back</h1>";
-                    header("Refresh:1, url=../pages/login.html");
+                    echo "<h3>Restricted Access. Go Back!</h3>";
                 } 
         } else {
-            echo "<h1>Invalid Password</h1>";
-            header("Refresh:1, url=../pages/login.html");
+            echo "Invalid Password!";
         }
     } else {
-        echo "<h1>Invalid Email</h1>";
-        header("Refresh:1, url=../pages/login.html");
+        echo "<h3>Invalid Email!</h3>";
     }
     
     //$stmt->close();

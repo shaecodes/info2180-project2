@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/login.css">
-    <script src="../script/g.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <title>Log In</title>
 </head>
 <header>
@@ -13,13 +13,12 @@
         session_start();
     ?>
 </header>
-<body>
+<body id="content">
     <div class="container">
-        <form action="../php/login.php" method="post" class = "login">
+        
+        <form id="login-form">
             <h1>Login</h1> 
              
-       
-            <p id="text"></p>
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
             <br>
@@ -28,10 +27,59 @@
             <input type="password" id="password" name="password" required>
             <br>
 
-            <button type="submit">Login</button>
+            <button type="button" onclick="submitForm()">Login</button>
         </form>
+        <div id="text" class="popup">
+            <p id="result"></p>
+        </div>
        
     </div>
+   
+    <script>
+        function submitForm() {
+            // Get form data
+            var formData = $("#login-form").serialize();
+            // Make AJAX request
+            $.ajax({
+                type: "POST",
+                url: "../php/login.php", // Specify your PHP processing file
+                data: formData,
+                success: function(response) {
+                    // Handle the response from the server
+                    $("#result").html(response);
+                    
+                },
+                error: function(error) {
+                    console.log(error);
+                    $("#result").html("An error occurred during form submission.");
+                }
+            });
+            var loca = document.getElementById('result').innerHTML;
+            document.getElementById('text').style.display = 'block';
+
+            alert(loca);
+            loadPage(textresult);
+        }
+
+        function loadPage(response) {
+            setTimeout(function() {
+                switch (response) {
+                    case "Login Successfully!":
+                        url = '../php/dashboard.php';
+                        break;
+                    case "Restricted Access. Go Back!":
+                        url = 'login.html';
+                        break;
+                    case "Invalid Password!":
+                        url = 'login.html';
+                        break;
+                    case "Invalid Email!":
+                        url = 'login.html';
+                        break;
+                    }
+            window.location.href = url;
+        },2000);}
+        </script>
 <footer> Copyright @ 2022 Dolphin CRM</footer>
 </body>
 </html>
