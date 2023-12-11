@@ -2,6 +2,7 @@ DROP DATABASE IF EXISTS dolphin_crm;
 CREATE DATABASE dolphin_crm;
 USE dolphin_crm;
 
+--Users--
 CREATE TABLE Users (
     id INT PRIMARY KEY AUTO_INCREMENT,
     firstname VARCHAR(35) NOT NULL,
@@ -33,13 +34,12 @@ CREATE TABLE Contacts (
     FOREIGN KEY (assigned_to) REFERENCES Users(id),
     FOREIGN KEY (created_by) REFERENCES Users(id)
 );
---NOTES--
+ --Notes--
 CREATE TABLE Notes (
     id INT PRIMARY KEY AUTO_INCREMENT,
     contact_id INTEGER NOT NULL,
     comment TEXT NOT NULL,
     created_by INT,
     FOREIGN KEY (created_by) REFERENCES Users(id),
-    created_at DATETIME NOT NULL
+    created_at DATETIME NOT NULL CURRENT_TIMESTAMP
 );
-
