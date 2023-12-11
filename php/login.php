@@ -35,20 +35,27 @@ if ($conn->connect_error){
             $_SESSION['user_role'] = $data['_role'];
 
                 if ($_SESSION['user_role'] === "Admin"){
-                   /* echo "<script>var div = document.getElementByClassName('container');
-                    var popup = document.createElement('div');
-                    popup.setAttribute('class', 'popup');
-                    var para = document.createElement('p');
-                    p.innerHTML = 'Login Successfully';
-                    popup.appendChild(para);
-                    div.appendChild(popup);
-                    </script>";
-                    echo "y";*/
-                    echo '<script>
-                document.getElementById("login-success-popup").style.display = "block";
-              </script>';
+                    echo json_encode("Login Successfully");
+                    /*echo '<style>.popup {
+                        display: block;
+                        position: fixed;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        padding: 20px;
+                        background-color: black;
+                        background: #fff;
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                        z-index: 9999;
+                    }</style><div id="login-success-popup" class="popup">
+                    <?php
+                    // Include the PHP file to send echo to HTML
+                    include "log.php";
+                    ?>
+                  <p id="text">nm</p>
+                </div>';*/
                     //echo "<h1>Login Successfully</h1>";
-                    header("Refresh:1, url=dashboard.php");
+                  header("Refresh:1, url=../pages/login.html");
 
                 // should navigate to the dashboard page once created
                 } else {
@@ -64,7 +71,7 @@ if ($conn->connect_error){
         header("Refresh:1, url=../pages/login.html");
     }
     
-    $stmt->close();
-    $conn->close();
+    //$stmt->close();
+    //$conn->close();
 }
 ?>
