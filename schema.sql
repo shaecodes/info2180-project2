@@ -16,6 +16,7 @@ INSERT INTO Users VALUES (1,'Admin','User',"$2y$10$sYjBX1kGKDTrwQqW1wKjTOpRBswpo
 (2,'John','Brown',"$2y$10$f1Qyv4wvRZxPRmUjzl07R.HFtaAOwC3XKLXqeHcbXSdL06Cdyuypi","johnb@gmail.com","Member",CURRENT_TIMESTAMP),
 (3,'Mary','White',"$2y$10$uTSs0PPWzfJZmSuQyKaYG.CE4NLZXSIOBJyRIucoE.LZJTi6AwZc.","maryw@gmail.com","Member",CURRENT_TIMESTAMP);
 
+--Contacts--
 CREATE TABLE Contacts (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(5) NOT NULL,
@@ -32,12 +33,13 @@ CREATE TABLE Contacts (
     FOREIGN KEY (assigned_to) REFERENCES Users(id),
     FOREIGN KEY (created_by) REFERENCES Users(id)
 );
-
+--NOTES--
 CREATE TABLE Notes (
     id INT PRIMARY KEY AUTO_INCREMENT,
     contact_id INTEGER NOT NULL,
     comment TEXT NOT NULL,
     created_by INT,
     FOREIGN KEY (created_by) REFERENCES Users(id),
-    created_at DATETIME NOT NULL CURRENT_TIMESTAMP
+    created_at DATETIME NOT NULL
 );
+
