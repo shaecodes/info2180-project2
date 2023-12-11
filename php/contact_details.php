@@ -14,6 +14,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['assign_to_me'])) {
+    assignContactToCurrentUser($contactId, $current_user);
+    header("Location: contact_details.php?id=$contactId");
+    exit();
+}
+
 function addNoteToDatabase($contactId, $newNote, $current_user) {
     $query = "INSERT INTO Notes (contact_id, comment, created_by, created_at) VALUES (?, ?, ?, CURRENT_TIMESTAMP)";
     $conn = connectToDatabase();
@@ -128,7 +134,30 @@ function switchRoleText($currentRole) {
             return 'Unknown Role';
     }
 }
+
+function assignContactToCurrentUser($contactId, $current_user) {
+    $query = "UPDATE Contacts SET assigned_to = ? WHERE id = ?";
+    $conn = connectToDatabase();
+    $statement = $conn->prepare($query);
+
+    if (!$statement) {
+        die("Error in SQL query: " . $conn->error);
+    }
+
+    $statement->bind_param('ii', $current_user, $contactId);
+
+    if (!$statement) {
+        die("Error binding parameters: " . $conn->error);
+    }
+
+    $statement->execute();
+
+    $statement->close();
+    $conn->close();
+}
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -161,7 +190,7 @@ function switchRoleText($currentRole) {
     <div class = "">
         <img src = "" alt= "person icon">
         <h2><?php echo $contactDetails['title'] . ' ' . $contactDetails['firstname'] . ' ' . $contactDetails['lastname']; ?></h2>
-        <button> Assign To Me</button>
+        <button type="submit" name="assign_to_me">Assign To Me</button>
         <button id="switchRoleBtn" onclick="switchRole()"> Switch to <?php echo switchRoleText($contactDetails['_type']); ?></button>
         <p> Created on <?php echo (new DateTime($contactDetails['created_at']))->format('F j, Y'); ?></p>
         <p> Updated on <?php echo formatDateTime($contactDetails['updated_at'], $contactDetails['created_at']); ?></p>
@@ -181,30 +210,27 @@ function switchRoleText($currentRole) {
         <p><?php echo $contactDetails['assigned_firstname'] . ' ' . $contactDetails['assigned_lastname']; ?></p>
 
     </div>
-
     <div class="notes">
-    <img src="" alt="notes icon">
-    <h2>Notes</h2>
-    <?php
-    $contactNotes = fetchNotesForContact($contactId);
-    foreach ($contactNotes as $note) {
-        echo '<div class="note">';
-        echo '<p>' . $note['creator_firstname'] . ' ' . $note['creator_lastname'] . '</p>';
-        echo '<p>' . $note['comment'] . '</p>';
-        $createdTime = new DateTime($note['created_at']);
-        echo '<p>' . $createdTime->format('F j, Y ga') . '</p>'; // 'F j, Y ga' format includes month, day, year, and time
-        echo '</div>';
-    }
-    ?>
-
-
-    <div class="note">
-        <h3>Add a note about <?php echo $contactDetails['firstname'] ?></h3>
-        <form action="contact_details.php?id=<?php echo $contactId; ?>" method="post">
-            <label for="new_note">Enter a new note:</label>
-            <textarea id="new_note" name="new_note" required></textarea><br>
-            <button type="submit">Save Note</button>
-        </form>
+        <img src="" alt="notes icon">
+        <h2>Notes</h2>
+        <?php
+        $contactNotes = fetchNotesForContact($contactId);
+        foreach ($contactNotes as $note) {
+            echo '<div class="note">';
+            echo '<p>' . $note['creator_firstname'] . ' ' . $note['creator_lastname'] . '</p>';
+            echo '<p>' . $note['comment'] . '</p>';
+            $createdTime = new DateTime($note['created_at']);
+            echo '<p>' . $createdTime->format('F j, Y ga') . '</p>'; // 'F j, Y ga' format includes month, day, year, and time
+            echo '</div>';
+        }
+        ?>
+        <div class="note">
+            <h3>Add a note about <?php echo $contactDetails['firstname'] ?></h3>
+            <form action="contact_details.php?id=<?php echo $contactId; ?>" method="post">
+                <label for="new_note">Enter a new note:</label>
+                <textarea id="new_note" name="new_note" required></textarea><br>
+                <button type="submit">Save Note</button>
+            </form>
     </div> 
 </div>
 </body>
