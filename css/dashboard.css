@@ -51,7 +51,8 @@ table{
 }
 
 
-form button, .add-contact-btn{
+form button, .add-contact-btn,
+.view-contact-btn{
     padding: 10px 15px;
     border-radius: 5px;
     border: 1px solid rgb(222, 222, 222);
@@ -60,7 +61,8 @@ form button, .add-contact-btn{
     font-weight: bold;
     margin: 10px;
 }
-form button:hover, .add-contact-btn:hover{
+form button:hover, .add-contact-btn:hover,
+.view-contact-btn:hover{
     background-color:rgb(188, 211, 238);
     cursor: pointer;
 }

@@ -2,6 +2,7 @@ DROP DATABASE IF EXISTS dolphin_crm;
 CREATE DATABASE dolphin_crm;
 USE dolphin_crm;
 
+--Users--
 CREATE TABLE Users (
     id INT PRIMARY KEY AUTO_INCREMENT,
     firstname VARCHAR(35) NOT NULL,
@@ -16,6 +17,7 @@ INSERT INTO Users VALUES (1,'Admin','User',"$2y$10$sYjBX1kGKDTrwQqW1wKjTOpRBswpo
 (2,'John','Brown',"$2y$10$f1Qyv4wvRZxPRmUjzl07R.HFtaAOwC3XKLXqeHcbXSdL06Cdyuypi","johnb@gmail.com","Member",CURRENT_TIMESTAMP),
 (3,'Mary','White',"$2y$10$uTSs0PPWzfJZmSuQyKaYG.CE4NLZXSIOBJyRIucoE.LZJTi6AwZc.","maryw@gmail.com","Member",CURRENT_TIMESTAMP);
 
+--Contacts--
 CREATE TABLE Contacts (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(5) NOT NULL,
@@ -32,16 +34,12 @@ CREATE TABLE Contacts (
     FOREIGN KEY (assigned_to) REFERENCES Users(id),
     FOREIGN KEY (created_by) REFERENCES Users(id)
 );
-
+ --Notes--
 CREATE TABLE Notes (
     id INT PRIMARY KEY AUTO_INCREMENT,
     contact_id INTEGER NOT NULL,
     comment TEXT NOT NULL,
     created_by INT,
     FOREIGN KEY (created_by) REFERENCES Users(id),
-    created_at DATETIME NOT NULL
+    created_at DATETIME NOT NULL CURRENT_TIMESTAMP
 );
-
-INSERT INTO Notes (contact_id, comment, created_by, created_at) VALUES
-(2, 'This is a placeholder comment for John Brown.', 1, CURRENT_TIMESTAMP),
-(3, 'Another placeholder comment for Mary White.', 1, CURRENT_TIMESTAMP);
