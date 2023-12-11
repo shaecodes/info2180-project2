@@ -40,12 +40,9 @@ if(!$stmt->bind_param("sssssssii",$title_fil,$fname_fil,$lname_fil,$email_fil,$t
 }
 
 if ($stmt->execute()) {
-    echo "<h1>Contact added successfully</h1>";
-    header("Refresh:1, url=dashboard.php");
-    exit(0);
+    echo "Contact Added Successfully!";
 } else {
-    echo "<h1>Error adding user: " . $stmt->error . "</h1>";
-    header("Refresh:1, url=../pages/contacts.html");
+    echo "Error Adding User!";
 }
 
   

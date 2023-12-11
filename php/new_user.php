@@ -37,11 +37,9 @@ if (!$stmt->bind_param("sssss", $firstName_filter, $lastName_filter, $email_filt
 }
 
 if ($stmt->execute()) {
-    echo "<h1>User added successfully</h1>";
-    header("Refresh:1, url=dashboard.php");
+    echo "User Added Successfully!";
 } else {
-    echo "<h1>Error adding user: " . $stmt->error . "</h1>";
-    header("Refresh:1, url=../pages/new_user.html");
+    echo "Error Adding User!";
 }
 
 $stmt->close();

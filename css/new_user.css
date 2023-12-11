@@ -22,6 +22,21 @@ body{
     font-size: 45px;
 }
 
+.popup {
+    display: none;
+    position: fixed;
+    top: 120px;
+    right: 30px;
+    /*transform: translate(-50%, -50%);
+    */
+    padding: 10px;
+    border-radius: 5px;
+    background-color: black;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+}
+
 form{
     display: flex;
     flex-direction: column;

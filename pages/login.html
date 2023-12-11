@@ -8,10 +8,14 @@
     <title>Log In</title>
 </head>
 <header>
-    <?php 
-        include '../php/header.php';
-        session_start();
-    ?>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../css/header.css">
+    </head>
+    <nav>
+        <img src="../images/dolphin-icon.jpeg" alt="Dolphin Icon">
+        <h1>Dolphin CRM</h1>
+    </nav>
+    
 </header>
 <body id="content">
     <div class="container">
@@ -39,7 +43,6 @@
         function submitForm() {
             // Get form data
             var formData = $("#login-form").serialize();
-            // Make AJAX request
             $.ajax({
                 type: "POST",
                 url: "../php/login.php", // Specify your PHP processing file
@@ -47,38 +50,33 @@
                 success: function(response) {
                     // Handle the response from the server
                     $("#result").html(response);
-                    
+                    document.getElementById('text').style.display = 'block';
+                    var textresult = document.getElementById('result').innerHTML;
+                    loadPage(textresult);
                 },
                 error: function(error) {
                     console.log(error);
                     $("#result").html("An error occurred during form submission.");
                 }
             });
-            var loca = document.getElementById('result').innerHTML;
-            document.getElementById('text').style.display = 'block';
-
-            alert(loca);
-            loadPage(textresult);
-        }
 
         function loadPage(response) {
             setTimeout(function() {
                 switch (response) {
                     case "Login Successfully!":
-                        url = '../php/dashboard.php';
+                        window.location.assign('../php/dashboard.php');
                         break;
                     case "Restricted Access. Go Back!":
-                        url = 'login.html';
+                        window.location.assign('login.html');
                         break;
                     case "Invalid Password!":
-                        url = 'login.html';
+                        window.location.assign('login.html');
                         break;
                     case "Invalid Email!":
-                        url = 'login.html';
+                        window.location.assign('login.html');
                         break;
                     }
-            window.location.href = url;
-        },2000);}
+        },2000);}}
         </script>
 <footer> Copyright @ 2022 Dolphin CRM</footer>
 </body>

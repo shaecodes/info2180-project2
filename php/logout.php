@@ -1,4 +1,6 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
+    <?php
 // Start the session
 session_start();
 
@@ -9,6 +11,9 @@ $_SESSION = array();
 session_destroy();
 
 // Redirect to the login page or any other desired location
-header("Location: ../pages/login.html");
-exit;
 ?>
+ <script>
+        window.location.assign('../pages/login.html');
+    </script>
+</html>
+

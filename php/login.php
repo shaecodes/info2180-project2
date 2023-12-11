@@ -39,16 +39,16 @@ if ($conn->connect_error){
 
                 // should navigate to the dashboard page once created
                 } else {
-                    echo "<h3>Restricted Access. Go Back!</h3>";
+                    echo "Restricted Access. Go Back!";
                 } 
         } else {
             echo "Invalid Password!";
         }
     } else {
-        echo "<h3>Invalid Email!</h3>";
+        echo "Invalid Email!";
     }
     
-    //$stmt->close();
-    //$conn->close();
+    $stmt->close();
+    $conn->close();
 }
 ?>
