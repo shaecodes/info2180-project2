@@ -3,7 +3,7 @@ body{
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.person, .basic_info, .notes{
+.person, .notes{
     display: flex;
     align-items: center;
     background-color: white;
@@ -12,15 +12,65 @@ body{
     margin: 0 auto;
     margin-top: 10px;
     flex-direction: column;
-    /* height: 100vh; */
 }
 
-.person, .basic_info, .notes{
+.basic_info {
+    display: grid;
+    align-items: center;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: white;
+    grid-template-columns: auto auto; 
+    gap: 10px; 
+}
+
+.basic_info .label {
+    font-weight: bold;
+}
+
+
+.person, .notes{
     h1, h2, h3{
         color: rgb(42, 85, 211);
         text-align: center;
     }
 }
+
+.intro, .note_header {
+    display: flex;
+    align-items: center; 
+}
+
+.intro img, .note_header img {
+    margin-right: 10px; 
+}
+
+.contact-description{
+    background-color: white;
+    margin-top: 10px;
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+#notification {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #90EE90;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    display: none;
+    z-index: 9999;
+}
+
+#notification.error {
+    background-color: #ffdddd;
+    color: #ff0000;
+    border: 1px solid #ff0000;
+}
+
 
 table{
     width: 100%;

@@ -172,14 +172,46 @@ function assignContactToCurrentUser($contactId, $current_user) {
             $.ajax({
                 type: 'POST',
                 url: 'switchRole.php',
-                data: { contactId: <?php echo $contactDetails['id']; ?> },
-                success: function(response) {
-                    $('#switchRoleBtn').text(' Switch to ' + response);
+                data: {
+                    contactId: <?php echo $contactDetails['id']; ?>
                 },
-                error: function(error) {
+                success: function (response) {
+                    $('#switchRoleBtn').text(' Switch to ' + response);
+                    showNotification('Role switched successfully.');
+                },
+                error: function (error) {
                     console.error('Error switching role: ' + error.responseText);
+                    showNotification('Error switching role. Please try again.', true);
                 }
             });
+        }
+
+        function assignToMe() {
+            $.ajax({
+                type: 'POST',
+                url: 'assignToMe.php', // Adjust the URL accordingly
+                data: {
+                    contactId: <?php echo $contactDetails['id']; ?>
+                },
+                success: function () {
+                    showNotification('Contact assigned to you successfully.');
+                },
+                error: function (error) {
+                    console.error('Error assigning contact: ' + error.responseText);
+                    showNotification('Error assigning contact. Please try again.', true);
+                }
+            });
+        }
+
+        function showNotification(message, isError = false) {
+            var notification = $('#notification');
+            notification.text(message);
+            if (isError) {
+                notification.addClass('error');
+            } else {
+                notification.removeClass('error');
+            }
+            notification.slideDown().delay(3000).slideUp(); 
         }
     </script>
 </head>
@@ -187,32 +219,37 @@ function assignContactToCurrentUser($contactId, $current_user) {
     <?php include('header.php');?>
     </header>
 <body>
-    <div class = "">
-        <img src = "" alt= "person icon">
-        <h2><?php echo $contactDetails['title'] . ' ' . $contactDetails['firstname'] . ' ' . $contactDetails['lastname']; ?></h2>
+    <div id="notification"></div>
+    <div class = "contact-description">
+        <div class = "intro">
+            <img src = "../images/user.png" alt= "person icon">
+            <h2><?php echo $contactDetails['title'] . ' ' . $contactDetails['firstname'] . ' ' . $contactDetails['lastname']; ?></h2>
+        </div>
         <button type="submit" name="assign_to_me">Assign To Me</button>
-        <button id="switchRoleBtn" onclick="switchRole()"> Switch to <?php echo switchRoleText($contactDetails['_type']); ?></button>
+        <button id="switchRoleBtn" onclick="switchRole()"> Switch Role </button>
         <p> Created on <?php echo (new DateTime($contactDetails['created_at']))->format('F j, Y'); ?></p>
         <p> Updated on <?php echo formatDateTime($contactDetails['updated_at'], $contactDetails['created_at']); ?></p>
     </div>
 
     <div class = "basic_info">
-        <p> Email </p>
+        <p class = label> Email </p>
         <p><?php echo $contactDetails['email']; ?></p>
 
-        <p> Telephone </p>
+        <p class = label> Telephone </p>
         <p><?php echo $contactDetails['telephone']; ?></p>
 
-        <p> Company </p>
+        <p class = label> Company </p>
         <p><?php echo $contactDetails['company']; ?></p>
 
-        <p> Assigned To </p>
+        <p class = label> Assigned To </p>
         <p><?php echo $contactDetails['assigned_firstname'] . ' ' . $contactDetails['assigned_lastname']; ?></p>
 
     </div>
     <div class="notes">
-        <img src="" alt="notes icon">
-        <h2>Notes</h2>
+        <div class = "note_header">
+            <img src="../images/notes.png" alt="notes icon">
+            <h2>Notes</h2>
+        </div>
         <?php
         $contactNotes = fetchNotesForContact($contactId);
         foreach ($contactNotes as $note) {
